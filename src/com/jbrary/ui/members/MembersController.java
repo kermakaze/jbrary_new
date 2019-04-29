@@ -66,16 +66,14 @@ public class MembersController  implements Initializable {
         membersTable.getColumns().get(PROGRAM_INDEX).setCellValueFactory(new PropertyValueFactory<>("program"));
         membersTable.getColumns().get(RESIDENCE_INDEX).setCellValueFactory(new PropertyValueFactory<>("residence"));
 
-        ObservableList<User> list = getBookList();
+        ObservableList<User> list = getMemberList();
         membersTable.setItems(list);
     }
 
 
-    private ObservableList<User> getBookList() {
+    private ObservableList<User> getMemberList() {
 
 
-        Book book1 = new Book();
-        book1.setAuthor("Charles Darwin");
         ObservableList<User> list = FXCollections.observableArrayList(UserDao.all());
         return list;
     }

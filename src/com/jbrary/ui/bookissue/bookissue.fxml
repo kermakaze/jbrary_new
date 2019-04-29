@@ -10,11 +10,11 @@
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jbrary.ui.bookissue.BookIssueController">
    <children>
       <HBox  AnchorPane.rightAnchor="5" AnchorPane.topAnchor="16" >
-         <!--<JFXTextField promptText="Search for Book"/>-->
+        <JFXTextField promptText="Search for User Orders"/>
          <JFXButton fx:id="issueBookButton" mnemonicParsing="false" onAction="#onIssueNewBookButtonClicked" text="Issue New Book"/>
       </HBox>
 
-      <TableView fx:id="bookTable" layoutX="39.0" layoutY="81.0" prefHeight="316.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="orderTable" layoutX="39.0" layoutY="81.0" prefHeight="316.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="50.0">
          <columns>
             <TableColumn prefWidth="75.0" text="No" />
             <TableColumn prefWidth="75.0" text="Title" />
