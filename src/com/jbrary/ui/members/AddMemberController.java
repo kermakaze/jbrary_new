@@ -1,7 +1,10 @@
 package com.jbrary.ui.members;
 
+import com.jbrary.model.User;
+import com.jbrary.model.UserDao;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +16,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AddMemberController implements Initializable {
@@ -24,6 +29,8 @@ public class AddMemberController implements Initializable {
     JFXComboBox<Label> levelComboBox;
     @FXML
     JFXComboBox<Label> hallComboBox;
+    @FXML
+    JFXTextField nameInput;
 
 
     @Override
@@ -72,5 +79,29 @@ public class AddMemberController implements Initializable {
                 return new Label(string);
             }
         });
+    }
+
+    public void onAddNewMemberButtonClicked(ActionEvent e){
+
+        try {
+
+
+            User user = new User(nameInput.getText(), LocalDate.now(), "Male",
+                    100, "BSC", hallComboBox.getSelectionModel().getSelectedItem().getText(),
+                    "");
+            UserDao.insert(user);
+            Stage stage = (Stage) levelComboBox.getScene().getWindow();
+            stage.close();
+
+
+
+        }
+        catch (Exception exception){
+            System.err.println("Error occurred");
+            exception.printStackTrace();
+
+
+        }
+
     }
 }
