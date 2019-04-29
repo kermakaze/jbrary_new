@@ -54,7 +54,11 @@ public class BookViewController {
             Book book = BookDao.all().get(i);
             VBox vBox = new VBox();
             Image bookImage = new Image("com/jbrary/image/demo_book.jpg", 160, 200, true, false);
-            vBox.getChildren().add(new ImageView(bookImage));
+            try {
+                vBox.getChildren().add(new ImageView(getImageFromBase64String(book.getImage())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             vBox.getChildren().add(new Label(book.getTitle()));
             vBox.getChildren().add(new Label(book.getAuthor()));
 
@@ -77,7 +81,8 @@ public class BookViewController {
     private Image getImageFromBase64String(String newValue) throws IOException {
         BASE64Decoder base64Decoder = new BASE64Decoder();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(base64Decoder.decodeBuffer(newValue));
-        Image img = new Image(inputStream);
+        Image img = new Image(inputStream,160,200,true, true);
+
         return img;
     }
     private ObservableList<Book> getBookList() {
