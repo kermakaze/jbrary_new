@@ -2,6 +2,7 @@
 package com.jbrary.ui.booksview;
 
 import com.jbrary.model.Book;
+import com.jbrary.model.BookDao;
 import com.jbrary.ui.util.DialogUtil;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.collections.FXCollections;
@@ -44,20 +45,20 @@ public class BookViewController {
     }
 
     public void initialize() {
-        //JFXScrollPane.smoothScrolling(scrollPane);
 
-        String books[] = {"Things Fall Apart","Things Fall Apart","Things Fall Apart","Things Fall Apart","Things Fall Apart"
-                ,"Things Fall Apart","Things Fall Apart","Things Fall Apart","Things Fall Apart"};
+
 
 
 
         int row=0, col=0;
-        for (int i = 0; i <  20; i++) {
+
+        for (int i = 0; i <  BookDao.all().size(); i++) {
+            Book book = BookDao.all().get(i);
             VBox vBox = new VBox();
             Image bookImage = new Image("com/jbrary/image/demo_book.jpg", 160, 200, true, false);
             vBox.getChildren().add(new ImageView(bookImage));
-            vBox.getChildren().add(new Label("Flower"));
-            vBox.getChildren().add(new Label("Mark Twain"));
+            vBox.getChildren().add(new Label(book.getTitle()));
+            vBox.getChildren().add(new Label(book.getAuthor()));
 
             vBox.setPadding(new Insets(10,10,10,10));
             booksGrid.add(vBox,col,row);
@@ -95,9 +96,10 @@ public class BookViewController {
     private ObservableList<Book> getBookList() {
 
 
+
         Book book1 = new Book();
         book1.setAuthor("Charles Darwin");
-        ObservableList<Book> list = FXCollections.observableArrayList(book1);
+        ObservableList<Book> list = FXCollections.observableArrayList(BookDao.all());
         return list;
     }
 }
