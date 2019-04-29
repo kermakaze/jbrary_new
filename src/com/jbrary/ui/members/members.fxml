@@ -17,7 +17,7 @@
          <JFXButton fx:id="addMemberButton" mnemonicParsing="false" onAction="#onAddMemberButtonClicked" text="Add New Member" AnchorPane.rightAnchor="5" AnchorPane.topAnchor="16" />
       </HBox>
 
-      <TableView fx:id="bookTable" layoutX="39.0" layoutY="81.0" prefHeight="316.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="membersTable" layoutX="39.0" layoutY="81.0" prefHeight="316.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="50.0">
          <columns>
             <TableColumn prefWidth="75.0" text="ID" />
             <TableColumn prefWidth="75.0" text="Name" />
