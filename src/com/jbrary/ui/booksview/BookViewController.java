@@ -4,7 +4,6 @@ package com.jbrary.ui.booksview;
 import com.jbrary.model.Book;
 import com.jbrary.model.BookDao;
 import com.jbrary.ui.util.DialogUtil;
-import com.jfoenix.controls.JFXScrollPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,16 +11,15 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import sun.misc.BASE64Decoder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public class BookViewController {
     private static final int NO_INDEX = 0;
@@ -75,23 +73,12 @@ public class BookViewController {
 
 
 
-
-
-
-
-
-/*
-        bookTable.getColumns().get(NO_INDEX).setCellValueFactory(new PropertyValueFactory<>("author"));
-        bookTable.getColumns().get(TITLE_INDEX).setCellValueFactory(new PropertyValueFactory<>("author"));
-        bookTable.getColumns().get(AUTHOR_INDEX).setCellValueFactory(new PropertyValueFactory<>("author"));
-        bookTable.getColumns().get(STATE_INDEX).setCellValueFactory(new PropertyValueFactory<>("author"));
-        bookTable.getColumns().get(USER_INDEX).setCellValueFactory(new PropertyValueFactory<>("author"));
-        bookTable.getColumns().get(RT_DAY_INDEX_INDEX).setCellValueFactory(new PropertyValueFactory<>("author"));
-
-        ObservableList<Book> list = getBookList();
-        bookTable.setItems(list);*/
-
-
+    }
+    private Image getImageFromBase64String(String newValue) throws IOException {
+        BASE64Decoder base64Decoder = new BASE64Decoder();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(base64Decoder.decodeBuffer(newValue));
+        Image img = new Image(inputStream);
+        return img;
     }
     private ObservableList<Book> getBookList() {
 

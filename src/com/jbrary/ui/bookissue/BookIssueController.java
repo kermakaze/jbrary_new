@@ -6,6 +6,9 @@ import com.jbrary.model.User;
 import com.jbrary.model.UserDao;
 import com.jbrary.ui.util.DialogUtil;
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +18,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +34,8 @@ public class BookIssueController  implements Initializable {
     TableView<Order> orderTable;
     @FXML
     AnchorPane root;
+    @FXML TableColumn<Order, String> titleColumn,
+    authorColumn,stateColumn, userColumn, returnColumn;
 
 
 
@@ -43,7 +50,47 @@ public class BookIssueController  implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         orderTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
-        orderTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+
+        /*TableColumn<Order, String> titleColumn = new TableColumn<>();*/
+
+
+        titleColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Order, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Order, String> data) {
+                StringProperty sp = new SimpleStringProperty();
+                sp.setValue(String.valueOf(data.getValue().getBook().getTitle()));
+                return sp;
+            }
+        });
+
+        authorColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Order, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Order, String> param) {
+                StringProperty sp = new SimpleStringProperty();
+                sp.setValue(String.valueOf(param.getValue().getBook().getAuthor()));
+                return sp;
+            }
+        });
+
+        userColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Order, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Order, String> param) {
+                StringProperty sp = new SimpleStringProperty();
+                sp.setValue(String.valueOf(param.getValue().getUser().getName()));
+                return sp;
+            }
+        });
+
+        returnColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Order, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Order, String> param) {
+                StringProperty sp = new SimpleStringProperty();
+                sp.setValue(String.valueOf(param.getValue().getDueDateString()));
+                return sp;
+            }
+        });
+        //orderTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+
 
         orderTable.setItems(getOrderList());
     }
