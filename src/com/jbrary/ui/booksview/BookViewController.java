@@ -43,13 +43,7 @@ public class BookViewController {
     }
 
     public void initialize() {
-
-
-
-
-
         int row=0, col=0;
-
         for (int i = 0; i <  BookDao.all().size(); i++) {
             Book book = BookDao.all().get(i);
             VBox vBox = new VBox();
@@ -85,14 +79,6 @@ public class BookViewController {
 
         return img;
     }
-    private ObservableList<Book> getBookList() {
 
-
-
-        Book book1 = new Book();
-        book1.setAuthor("Charles Darwin");
-        ObservableList<Book> list = FXCollections.observableArrayList(BookDao.all());
-        return list;
-    }
 }
 

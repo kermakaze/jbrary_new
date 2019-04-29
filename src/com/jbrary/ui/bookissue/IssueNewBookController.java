@@ -1,12 +1,19 @@
 package com.jbrary.ui.bookissue;
 
+import com.jbrary.model.*;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.awt.*;
+
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class IssueNewBookController implements Initializable {
@@ -49,5 +56,36 @@ public class IssueNewBookController implements Initializable {
                 return new Label(string);
             }
         });
+    }
+
+    public void onIssueBookButtonClicked(ActionEvent e){
+
+        try {
+            User user = UserDao.find(5);
+            Book book = BookDao.find(1);
+
+            LocalDate dateFromBase = LocalDate.ofEpochDay(365);
+            Order order = new Order(user, book, dateFromBase,LocalDate.now());
+            OrderDao.insert(order);
+            Stage stage = (Stage) bookComboBox.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jbrary/ui/bookissue/bookissue.fxml"));
+            loader.load();
+
+            //Get controller of scene2
+            BookIssueController bookIssueController = loader.getController();
+            //Pass whatever data you want. You can have multiple method calls here
+            bookIssueController.reloadList();
+
+
+        }
+        catch (Exception exception){
+            System.err.println("Error occurred");
+            exception.printStackTrace();
+
+
+        }
+
     }
 }

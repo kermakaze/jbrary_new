@@ -49,6 +49,10 @@ public class BookIssueController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        loadDataIntoTable();
+    }
+
+    public void loadDataIntoTable() {
         orderTable.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
 
         /*TableColumn<Order, String> titleColumn = new TableColumn<>();*/
@@ -94,10 +98,26 @@ public class BookIssueController  implements Initializable {
 
         orderTable.setItems(getOrderList());
     }
+
     private ObservableList<Order> getOrderList() {
 
 
         ObservableList<Order> list = FXCollections.observableArrayList(OrderDao.all());
         return list;
+    }
+
+    public void reloadList(){
+        orderTable.getColumns().get(0).setVisible(false);
+        orderTable.getColumns().get(0).setVisible(true);
+        orderTable.getItems().removeAll(orderTable.getItems());
+        orderTable.setItems(getOrderList());
+        titleColumn.setText("Hey");
+
+    }
+
+    public void addNewOrder(Order order) {
+        orderTable.getItems().add(order);
+        orderTable.refresh();
+        System.out.println(order.toString());
     }
 }
