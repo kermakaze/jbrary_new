@@ -105,8 +105,6 @@ public class IssueNewBookController implements Initializable {
         catch (Exception exception){
             System.err.println("Error occurred");
             exception.printStackTrace();
-
-
         }
 
     }

@@ -26,17 +26,6 @@ public class HomeController implements Initializable {
     @FXML
     JFXButton issuedBooksTab;
 
-    /*@FXML
-    public void initialize() {
-        AnchorPane pane = null;
-        try {
-            pane = FXMLLoader.load(this.getClass().getResource("/com/jbrary/ui/bookissue/bookissue.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        contentPane.getChildren().setAll(pane);
-
-    }*/
 
     public void onBooksIssuedTabClicked(ActionEvent e) throws  Exception{
         AnchorPane pane = FXMLLoader.load(this.getClass().getResource("/com/jbrary/ui/bookissue/bookissue.fxml"));
