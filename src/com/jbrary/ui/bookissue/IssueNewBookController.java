@@ -23,32 +23,26 @@ public class IssueNewBookController implements Initializable {
 
 
     @FXML
-    JFXComboBox<Label> memberComboBox;
+    JFXComboBox<User> memberComboBox;
     @FXML
-    JFXComboBox<Label> bookComboBox;
+    JFXComboBox<Book> bookComboBox;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        List<Label> bookLabel = new ArrayList<>();
-        BookDao.all().forEach(new Consumer<Book>() {
-            @Override
-            public void accept(Book book) {
-                bookLabel.add(new Label(book.getTitle()));
-            }
-        });
+
         bookComboBox.getItems()
-                .addAll(bookLabel);
-        bookComboBox.setConverter(new StringConverter<Label>() {
+                .addAll(BookDao.all());
+        bookComboBox.setConverter(new StringConverter<Book>() {
             @Override
-            public String toString(Label object) {
-                return object==null? "" : object.getText();
+            public String toString(Book object) {
+                return object==null? "" : object.getTitle();
             }
 
             @Override
-            public Label fromString(String string) {
-                return new Label(string);
+            public Book fromString(String string) {
+                return null;
             }
         });
 
@@ -60,17 +54,17 @@ public class IssueNewBookController implements Initializable {
             }
         });
         memberComboBox.getItems()
-                .addAll(memberLabels);
+                .addAll(UserDao.all());
 
-        memberComboBox.setConverter(new StringConverter<Label>() {
+        memberComboBox.setConverter(new StringConverter<User>() {
             @Override
-            public String toString(Label object) {
-                return object==null? "" : object.getText();
+            public String toString(User object) {
+                return object==null? "" : object.getName();
             }
 
             @Override
-            public Label fromString(String string) {
-                return new Label(string);
+            public User fromString(String string) {
+                return null;
             }
         });
     }
@@ -78,8 +72,8 @@ public class IssueNewBookController implements Initializable {
     public void onIssueBookButtonClicked(ActionEvent e){
 
         try {
-            User user = UserDao.find(5);
-            Book book = BookDao.find(1);
+            User user = memberComboBox.getSelectionModel().getSelectedItem();
+            Book book = bookComboBox.getSelectionModel().getSelectedItem();
 
             LocalDate dateFromBase = LocalDate.ofEpochDay(365);
             Order order = new Order(user, book, dateFromBase,LocalDate.now());
