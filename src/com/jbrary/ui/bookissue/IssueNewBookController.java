@@ -2,11 +2,16 @@ package com.jbrary.ui.bookissue;
 
 import com.jbrary.model.*;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -26,7 +31,11 @@ public class IssueNewBookController implements Initializable {
     JFXComboBox<User> memberComboBox;
     @FXML
     JFXComboBox<Book> bookComboBox;
+    @FXML
+    JFXDatePicker returnDate;
 
+    @FXML
+    StackPane root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,8 +84,9 @@ public class IssueNewBookController implements Initializable {
             User user = memberComboBox.getSelectionModel().getSelectedItem();
             Book book = bookComboBox.getSelectionModel().getSelectedItem();
 
-            LocalDate dateFromBase = LocalDate.ofEpochDay(365);
-            Order order = new Order(user, book, dateFromBase,LocalDate.now());
+            LocalDate dueDate = returnDate.getValue();
+
+            Order order = new Order(user, book, LocalDate.now(), dueDate);
             OrderDao.insert(order);
             Stage stage = (Stage) bookComboBox.getScene().getWindow();
             stage.close();

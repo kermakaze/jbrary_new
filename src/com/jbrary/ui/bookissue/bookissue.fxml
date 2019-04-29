@@ -23,6 +23,7 @@
             <TableColumn visible="false" fx:id="stateColumn" prefWidth="75.0" text="State" />
             <TableColumn fx:id="userColumn" prefWidth="75.0" text="User" />
             <TableColumn  fx:id="returnColumn" minWidth="75" prefWidth="224.0" text="Return Date" />
+             <TableColumn  fx:id="finesColumn" minWidth="75" prefWidth="224.0" text="Fines (GHS)" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

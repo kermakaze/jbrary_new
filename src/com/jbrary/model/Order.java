@@ -11,6 +11,7 @@ public class Order {
     private LocalDate orderDate;
     private LocalDate dueDate;
 
+
     public Order(int id, User user, Book book, LocalDate orderDate, LocalDate dueDate) {
         this.id = id;
         this.user = user;
@@ -80,5 +81,9 @@ public class Order {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public double getFine(){
+        return 2.50;
     }
 }

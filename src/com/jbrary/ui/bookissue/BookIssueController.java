@@ -35,7 +35,7 @@ public class BookIssueController  implements Initializable {
     @FXML
     AnchorPane root;
     @FXML TableColumn<Order, String> titleColumn,
-    authorColumn,stateColumn, userColumn, returnColumn;
+    authorColumn,stateColumn, userColumn, returnColumn, finesColumn;
 
 
 
@@ -91,6 +91,14 @@ public class BookIssueController  implements Initializable {
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Order, String> param) {
                 StringProperty sp = new SimpleStringProperty();
                 sp.setValue(String.valueOf(param.getValue().getDueDateString()));
+                return sp;
+            }
+        });
+        finesColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Order, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Order, String> param) {
+                StringProperty sp = new SimpleStringProperty();
+                sp.setValue(String.valueOf(param.getValue().getFine()));
                 return sp;
             }
         });
