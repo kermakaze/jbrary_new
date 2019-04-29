@@ -11,7 +11,13 @@ import java.io.IOException;
 
 public class DialogUtil {
 
-    public static void openModalWindow(AnchorPane root, Class context, String layoutFilePath, String title) throws IOException {
+   public interface ChangeListener{
+        void onChange();
+    }
+    public static void openModalWindow(AnchorPane root,
+                                       Class context,
+                                       String layoutFilePath,
+                                       String title) throws IOException {
         Parent win = FXMLLoader.load(context.getClass().getResource(layoutFilePath));
         Stage newWindow = new Stage();
 
@@ -25,6 +31,7 @@ public class DialogUtil {
         newWindow.setY(root.getScene().getWindow().getY() - 50);
         newWindow.setMinWidth(500);
         newWindow.setScene(new Scene(win));
+
 
         // Specifies the owner Window (parent) for new window
         newWindow.initOwner(root.getScene().getWindow());

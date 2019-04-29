@@ -12,7 +12,7 @@
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="35" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
 
-          <JFXTextField maxWidth="1.7976931348623157E308"  fx:id="memberId" promptText="Member ID" />
+          <JFXComboBox maxWidth="1.7976931348623157E308"  fx:id="memberComboBox" promptText="Select the Member" />
           <JFXComboBox fx:id="bookComboBox" maxWidth="1.7976931348623157E308" promptText="Select the book" />
           <JFXTextField  fx:id="returnDate" promptText="Return Date" />
 

@@ -14,7 +14,10 @@ import java.awt.*;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class IssueNewBookController implements Initializable {
 
@@ -28,24 +31,38 @@ public class IssueNewBookController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
+        List<Label> bookLabel = new ArrayList<>();
+        BookDao.all().forEach(new Consumer<Book>() {
+            @Override
+            public void accept(Book book) {
+                bookLabel.add(new Label(book.getTitle()));
+            }
+        });
         bookComboBox.getItems()
-                .addAll(new Label("Jean Nelson Aka Hall"),
-                        new Label("Elizabeth Frances Sey Hall"),
-                        new Label("Alexander Adum Kwapong Hall"),
-                        new Label("Dr. Hilla Limann Hall"),
-                        new Label("Jubilee Hall"),
-                        new Label("Mensah Sarbah Hall"),
-                        new Label("Akuafo Hall"),
-                        new Label("Legon Hall"),
-                        new Label("Volta Hall"),
-                        new Label("Commonwealth Hall"),
-                        new Label("Pentagon Hostel"),
-                        new Label("International Students Hostel(ISH)"),
-                        new Label("Valco Graduate Hostel"),
-                        new Label("Bani Hostel"),
-                        new Label("James Top Nelson Yankah Hall"));
+                .addAll(bookLabel);
         bookComboBox.setConverter(new StringConverter<Label>() {
+            @Override
+            public String toString(Label object) {
+                return object==null? "" : object.getText();
+            }
+
+            @Override
+            public Label fromString(String string) {
+                return new Label(string);
+            }
+        });
+
+        List<Label> memberLabels = new ArrayList<>();
+        UserDao.all().forEach(new Consumer<User>() {
+            @Override
+            public void accept(User user) {
+                memberLabels.add(new Label(user.getName()));
+            }
+        });
+        memberComboBox.getItems()
+                .addAll(memberLabels);
+
+        memberComboBox.setConverter(new StringConverter<Label>() {
             @Override
             public String toString(Label object) {
                 return object==null? "" : object.getText();
@@ -71,12 +88,13 @@ public class IssueNewBookController implements Initializable {
             stage.close();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jbrary/ui/bookissue/bookissue.fxml"));
-            loader.load();
+            Parent root = (Parent) loader.load();
 
             //Get controller of scene2
             BookIssueController bookIssueController = loader.getController();
             //Pass whatever data you want. You can have multiple method calls here
             bookIssueController.reloadList();
+            bookIssueController.orderTable=null;
 
 
         }

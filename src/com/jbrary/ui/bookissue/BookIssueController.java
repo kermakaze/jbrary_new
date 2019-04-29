@@ -49,6 +49,7 @@ public class BookIssueController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         loadDataIntoTable();
     }
 
@@ -93,7 +94,6 @@ public class BookIssueController  implements Initializable {
                 return sp;
             }
         });
-        //orderTable.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("orderDate"));
 
 
         orderTable.setItems(getOrderList());
@@ -106,18 +106,15 @@ public class BookIssueController  implements Initializable {
         return list;
     }
 
-    public void reloadList(){
+    @FXML
+    void reloadList(){
         orderTable.getColumns().get(0).setVisible(false);
         orderTable.getColumns().get(0).setVisible(true);
         orderTable.getItems().removeAll(orderTable.getItems());
         orderTable.setItems(getOrderList());
         titleColumn.setText("Hey");
+        root.setVisible(false);
 
     }
 
-    public void addNewOrder(Order order) {
-        orderTable.getItems().add(order);
-        orderTable.refresh();
-        System.out.println(order.toString());
-    }
 }
