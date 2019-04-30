@@ -1,5 +1,6 @@
 package com.jbrary.ui.bookissue;
 
+import com.jbrary.Main;
 import com.jbrary.model.*;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -86,7 +87,8 @@ public class IssueNewBookController implements Initializable {
 
             LocalDate dueDate = returnDate.getValue();
 
-            Order order = new Order(user, book, LocalDate.now(), dueDate);
+            Order order = new Order(user, book, LocalDate.now(), dueDate, false);
+
             OrderDao.insert(order);
             Stage stage = (Stage) bookComboBox.getScene().getWindow();
             stage.close();
@@ -99,6 +101,8 @@ public class IssueNewBookController implements Initializable {
             //Pass whatever data you want. You can have multiple method calls here
             bookIssueController.reloadList();
             bookIssueController.orderTable=null;
+
+            Main.eventBus.post(new Main.DatabaseChangeEvent());
 
 
         }

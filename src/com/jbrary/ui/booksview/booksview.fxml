@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXScrollPane?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.layout.HBox?>
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jbrary.ui.booksview.BookViewController">
+<AnchorPane fx:id="root" prefHeight="400.0" AnchorPane.leftAnchor="10"  AnchorPane.rightAnchor="0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jbrary.ui.booksview.BookViewController">
    <children>
-       <HBox AnchorPane.rightAnchor="5" AnchorPane.topAnchor="16" >
-           <JFXTextField promptText="Search for Book"/>
+       <HBox AnchorPane.rightAnchor="5" AnchorPane.topAnchor="16">
+           <JFXTextField fx:id="search" promptText="Search for Book" />
+           <JFXComboBox fx:id="filter" promptText="Filter Search">
+            <opaqueInsets>
+               <Insets left="10.0" />
+            </opaqueInsets>
+            <HBox.margin>
+               <Insets left="10.0" />
+            </HBox.margin></JFXComboBox>
+           <JFXButton fx:id="refresh" text="Refresh"/>
            <JFXButton fx:id="addBookButton" mnemonicParsing="false" onAction="#onNewBookButtonClicked" text="Add New Book" AnchorPane.rightAnchor="5" AnchorPane.topAnchor="16" />
        </HBox>
 

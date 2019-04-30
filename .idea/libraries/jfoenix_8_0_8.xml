@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/jfoenix-8.0.8.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/sqlite-jdbc-3.23.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guava-23.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

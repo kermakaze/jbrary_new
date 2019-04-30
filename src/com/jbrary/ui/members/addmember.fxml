@@ -19,17 +19,17 @@
           <HBox>
               <Label text="Gender: " />
 
-              <JFXRadioButton text="Male" />
-              <JFXRadioButton text="Female">
+              <JFXRadioButton  fx:id="maleRadioButton" text="Male" />
+              <JFXRadioButton fx:id="femaleRadioButton" text="Female">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin></JFXRadioButton>
           </HBox>
           <!--<JFXTextField promptText="ID No."  visible="false"/>-->
-          <JFXDatePicker maxWidth="1.7976931348623157E308" promptText="Select Birth Date" AnchorPane.rightAnchor="0" />
+          <JFXDatePicker  editable="false" fx:id="datePicker" maxWidth="1.7976931348623157E308" promptText="Select Birth Date" AnchorPane.rightAnchor="0" />
           <JFXComboBox fx:id="levelComboBox" maxWidth="1.7976931348623157E308" promptText="Select the level" />
           <JFXComboBox fx:id="hallComboBox" maxWidth="1.7976931348623157E308" promptText="Select Hall of Residence" />
-          <JFXTextField promptText="Programme of Study" />
+          <JFXTextField  fx:id="programmeInput" promptText="Programme of Study" />
 
 
 

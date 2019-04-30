@@ -2,15 +2,14 @@ package com.jbrary.ui.members;
 
 import com.jbrary.model.User;
 import com.jbrary.model.UserDao;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,11 +29,22 @@ public class AddMemberController implements Initializable {
     @FXML
     JFXComboBox<Label> hallComboBox;
     @FXML
-    JFXTextField nameInput;
+    JFXTextField nameInput, programmeInput;
+    ToggleGroup genderGroup;
+    @FXML
+    JFXRadioButton maleRadioButton, femaleRadioButton;
+    @FXML
+    JFXDatePicker datePicker;
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        genderGroup = new ToggleGroup();
+        maleRadioButton.setToggleGroup(genderGroup);
+        maleRadioButton.setUserData("Male");
+        femaleRadioButton.setUserData("Female");
+        femaleRadioButton.setToggleGroup(genderGroup);
         levelComboBox.getItems()
                 .addAll(new Label("Level 100"),
                         new Label("Level 200"),
@@ -86,8 +96,9 @@ public class AddMemberController implements Initializable {
         try {
 
 
-            User user = new User(nameInput.getText(), LocalDate.now(), "Male",
-                    100, "BSC", hallComboBox.getSelectionModel().getSelectedItem().getText(),
+            User user = new User(nameInput.getText(), datePicker.getValue(), (String)genderGroup.getSelectedToggle().getUserData(),
+                    Integer.valueOf(levelComboBox.getSelectionModel().getSelectedItem().getText().replace("Level ","")),
+                    programmeInput.getText(), hallComboBox.getSelectionModel().getSelectedItem().getText(),
                     "");
             UserDao.insert(user);
             Stage stage = (Stage) levelComboBox.getScene().getWindow();

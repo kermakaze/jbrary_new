@@ -13,7 +13,8 @@
         prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jbrary.ui.members.MembersController">
    <children>
       <HBox AnchorPane.rightAnchor="5" AnchorPane.topAnchor="16" >
-         <JFXTextField promptText="Search for Members"/>
+         <JFXTextField promptText="Search for Members" fx:id="search"/>
+         <JFXButton fx:id="refresh" text="Refresh"/>
          <JFXButton fx:id="addMemberButton" mnemonicParsing="false" onAction="#onAddMemberButtonClicked" text="Add New Member" AnchorPane.rightAnchor="5" AnchorPane.topAnchor="16" />
       </HBox>
 

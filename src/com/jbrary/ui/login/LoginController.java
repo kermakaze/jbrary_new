@@ -23,9 +23,9 @@ public class LoginController {
     private JFXButton loginButton;
 
     public void onLoginButtonClicked(ActionEvent e) throws Exception {
-        if (true) {
-            Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
-            Scene scene = new Scene(root, 1000, 650);
+        if (usernameField.getText().equals("admin") && passwordField.getText().equals("admin")) {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/jbrary/ui/home/home.fxml"));
+            Scene scene = new Scene(root);
             Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();

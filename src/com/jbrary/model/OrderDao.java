@@ -33,8 +33,10 @@ public class OrderDao {
     public static void update(Order order) {
         try(PreparedStatement statement = DBHelper.getInstance().prepare(Query.UPDATE_ORDER)) {
             orderToSqliteQuery(order, statement);
-            statement.setInt(5, order.getId());
+
+            statement.setInt(6, order.getId());
             statement.execute();
+            System.out.println(statement.toString());
         } catch (SQLException e) {
             System.out.println("An error occurred while trying update order");
             e.printStackTrace();
@@ -107,7 +109,8 @@ public class OrderDao {
                             UserDao.find(resultSet.getInt(Query.Order.USER_ID_INDEX)),
                             BookDao.find(resultSet.getInt(Query.Order.BOOK_ID_INDEX)),
                             resultSet.getString(Query.Order.ORDER_DATE_INDEX),
-                            resultSet.getString(Query.Order.DUE_DATE_INDEX)
+                            resultSet.getString(Query.Order.DUE_DATE_INDEX),
+                            resultSet.getString(Query.Order.FULFILLED_INDEX)
                     )
             );
         }
@@ -118,6 +121,7 @@ public class OrderDao {
         statement.setInt(2, order.getBook().getId());
         statement.setString(3, order.getOrderDateString());
         statement.setString(4, order.getDueDateString());
+        statement.setString(5, order.getFullfilled());
     }
 
     public static void main(String[] args) throws SQLException {

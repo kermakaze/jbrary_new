@@ -7,6 +7,9 @@ import com.jbrary.ui.util.DialogUtil;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +29,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MembersController  implements Initializable {
@@ -39,10 +43,13 @@ public class MembersController  implements Initializable {
     private static final int RESIDENCE_INDEX = 6;
 
 @FXML
-    JFXButton addMemberButton;
+    JFXButton addMemberButton, refresh;
 
 @FXML
     TableView<User> membersTable;
+
+@FXML
+    JFXTextField search;
 @FXML AnchorPane root;
 
 
@@ -58,6 +65,13 @@ public class MembersController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        refresh.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                membersTable.setItems(getMemberList());
+            }
+        });
+
         membersTable.getColumns().get(NO_INDEX).setCellValueFactory(new PropertyValueFactory<>("id"));
         membersTable.getColumns().get(NAME_INDEX).setCellValueFactory(new PropertyValueFactory<>("name"));
         membersTable.getColumns().get(DOB_INDEX).setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
@@ -68,6 +82,17 @@ public class MembersController  implements Initializable {
 
         ObservableList<User> list = getMemberList();
         membersTable.setItems(list);
+
+        search.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(newValue);
+                List<User>  foundUsers = UserDao.searchByName(newValue);
+                System.out.println(foundUsers);
+
+                membersTable.setItems(FXCollections.observableArrayList(foundUsers));
+            }
+        });
     }
 
 
